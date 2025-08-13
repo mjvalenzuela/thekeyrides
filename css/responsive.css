@@ -1,0 +1,365 @@
+/* Responsive design */
+
+/* Tablet landscape and small desktops */
+@media (max-width: 1200px) {
+    #sidebar {
+        width: 320px;
+    }
+    
+    #map {
+        margin-left: 320px;
+    }
+    
+    #sidebar.collapsed ~ #map {
+        margin-left: 50px;
+    }
+}
+
+/* Tablet portrait */
+@media (max-width: 992px) {
+    #sidebar {
+        width: 300px;
+    }
+    
+    #sidebar-content {
+        padding: 16px;
+    }
+    
+    #map {
+        margin-left: 300px;
+    }
+    
+    #sidebar.collapsed ~ #map {
+        margin-left: 50px;
+    }
+    
+    .control-group {
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+    }
+}
+
+/* Mobile landscape and small tablets */
+@media (max-width: 768px) {
+    #sidebar {
+        width: 100%;
+        transform: translateX(-100%);
+        box-shadow: var(--shadow-xl);
+    }
+    
+    #sidebar.collapsed {
+        transform: translateX(-100%);
+    }
+    
+    #sidebar:not(.collapsed) {
+        transform: translateX(0);
+    }
+    
+    #map {
+        margin-left: 0;
+    }
+    
+    #sidebar.collapsed ~ #map {
+        margin-left: 0;
+    }
+    
+    #sidebar-toggle-external {
+        display: flex !important;
+        top: 15px;
+        left: 15px;
+    }
+    
+    #location-controls {
+        top: 15px;
+        right: 15px;
+    }
+    
+    #legend {
+        bottom: 15px;
+        right: 15px;
+        left: 15px;
+        max-width: none;
+        padding: 16px;
+    }
+    
+    .control-group {
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+    }
+    
+    .filters-container {
+        justify-content: flex-start;
+        gap: 6px;
+    }
+    
+    .filter-checkbox {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+    
+    .popup-content {
+        max-width: 280px;
+    }
+    
+    .popup-header,
+    .popup-body,
+    .popup-actions {
+        padding: 12px 16px;
+    }
+}
+
+/* Mobile portrait */
+@media (max-width: 576px) {
+    #sidebar-header {
+        padding: 16px;
+    }
+    
+    #sidebar-content {
+        background-color: white;
+        padding: 12px;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+    
+    #sidebar-content::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    #sidebar-content::-webkit-scrollbar-track {
+        background: var(--border-light);
+        border-radius: 4px;
+    }
+    
+    #sidebar-content::-webkit-scrollbar-thumb {
+        background: var(--border-medium);
+        border-radius: 4px;
+    }
+    
+    .control-group {
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+    }
+    
+    .control-group h6 {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+    
+    .filter-checkbox {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+    
+    .category-icon {
+        font-size: 12px;
+    }
+    
+    .legend-item {
+        margin-bottom: 6px;
+        font-size: 12px;
+    }
+    
+    .legend-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
+    #search-input {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+    
+    #search-btn {
+        width: 28px;
+        height: 28px;
+        right: 6px;
+    }
+    
+    #locate-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .popup-header h4 {
+        font-size: 15px;
+    }
+    
+    .popup-body p {
+        font-size: 13px;
+    }
+    
+    .btn-route {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+    
+    .error-toast,
+    .success-toast,
+    .info-toast {
+        right: 10px;
+        left: 10px;
+        top: 10px;
+        max-width: none;
+        font-size: 13px;
+    }
+}
+
+/* Very small mobile devices */
+@media (max-width: 400px) {
+    #sidebar-header {
+        padding: 12px;
+    }
+    
+    #sidebar-title {
+        font-size: 16px;
+    }
+    
+    #sidebar-content {
+        padding: 10px;
+    }
+    
+    .control-group h6 {
+        font-size: 12px;
+    }
+    
+    .filter-checkbox {
+        font-size: 10px;
+        padding: 4px 6px;
+    }
+    
+    .legend-item {
+        font-size: 11px;
+    }
+}
+
+/* For iframe embedded mode */
+body.embedded #sidebar {
+    position: absolute;
+}
+
+body.embedded #map {
+    position: relative;
+}
+
+body.embedded #location-controls {
+    position: absolute;
+}
+
+body.embedded #legend {
+    position: absolute;
+}
+
+/* Animations for responsive behavior */
+@media (max-width: 768px) {
+    #sidebar {
+        transition: transform var(--transition-smooth);
+    }
+    
+    /* Backdrop for mobile when sidebar is open */
+    #sidebar:not(.collapsed)::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        opacity: 1;
+        transition: opacity var(--transition-normal);
+    }
+}
+
+/* Focus states for better accessibility on mobile */
+@media (max-width: 768px) {
+    .filter-checkbox:focus-within,
+    #search-input:focus,
+    #locate-btn:focus,
+    #sidebar-toggle:focus,
+    #sidebar-toggle-external:focus {
+        outline: 2px solid var(--btn-primary);
+        outline-offset: 2px;
+    }
+}
+
+/* Improved hover effects for touch devices */
+@media (hover: hover) {
+    .filter-checkbox:hover .category-dot {
+        transform: scale(1.1);
+    }
+    
+    .legend-item:hover .legend-icon {
+        transform: scale(1.05);
+    }
+    
+    .filter-checkbox:hover,
+    .legend-item:hover,
+    .btn-route:hover,
+    #locate-btn:hover,
+    #sidebar-toggle:hover,
+    #sidebar-toggle-external:hover {
+        transition: all var(--transition-fast);
+    }
+}
+
+/* Print styles */
+@media print {
+    #sidebar,
+    #sidebar-toggle-external,
+    #legend,
+    #location-controls {
+        display: none !important;
+    }
+    
+    #map {
+        width: 100% !important;
+        height: 400px !important;
+        margin: 0 !important;
+        position: static !important;
+    }
+    
+    #map-container {
+        width: 100% !important;
+        height: 400px !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-light: rgba(0, 0, 0, 0.3);
+        --border-medium: rgba(0, 0, 0, 0.5);
+        --text-muted: #495057;
+    }
+    
+    .filter-checkbox {
+        border-width: 2px;
+    }
+    
+    .legend-icon {
+        border-width: 3px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    #sidebar {
+        transition: none;
+    }
+    
+    .filter-checkbox,
+    .legend-item,
+    .btn-route,
+    #locate-btn,
+    #sidebar-toggle,
+    #sidebar-toggle-external {
+        transition: none;
+    }
+}

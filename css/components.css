@@ -1,0 +1,326 @@
+/* FILTROS UNIFICADOS - NUEVA IMPLEMENTACIÓN */
+.unified-filters-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.unified-filter-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var(--filter-bg);
+    border: 1px solid var(--border-light);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    user-select: none;
+}
+
+.unified-filter-item:hover {
+    background: var(--filter-bg-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.unified-filter-item.active {
+    background: var(--filter-active-bg);
+    border-color: var(--filter-active-border);
+}
+
+.filter-checkbox-input {
+    margin: 0;
+    transform: scale(1.1);
+    accent-color: var(--btn-primary);
+    cursor: pointer;
+}
+
+
+.filter-icon {
+  --fi: 26px;          /* tamaño del círculo */
+  --fi-inner: 18px;    /* tamaño del pictograma dentro */
+  width: var(--fi);
+  height: var(--fi);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  /* color del trazo del círculo */
+  border: 2px solid var(--text-light);
+
+  /* aquí se pinta el SVG embebido */
+  background-size: var(--fi-inner) var(--fi-inner);
+  background-repeat: no-repeat;
+  background-position: center;
+
+  /* el color del SVG ahora viene de 'color' */
+  color: #ffffff;
+
+  /* fondo del círculo + halo para que destaque */
+  background-color: #238F9E;          /* puedes cambiar por categoría abajo */
+  box-shadow: 0 0 0 2px rgba(255,255,255,.25), 0 2px 6px rgba(0,0,0,.2);
+  transition: transform .15s ease;
+}
+
+.unified-filter-item:hover .filter-icon { transform: scale(1.06); }
+.unified-filter-item.active .filter-icon { box-shadow: 0 0 0 3px rgba(35,143,158,.35); }
+
+
+.filter-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    flex: 1;
+    transition: color var(--transition-fast);
+}
+
+.unified-filter-item.active .filter-label {
+    color: var(--text-primary);
+}
+
+/* Iconos específicos por categoría usando background-image */
+.filter-icon.office {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.495V14.5h4.5a.5.5 0 0 0 .5-.5V2a.5.5 0 0 0-.5-.5H1.5A.5.5 0 0 0 1 2v12a.5.5 0 0 0 .5.5h5zM3 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm6-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/></svg>');
+}
+
+.filter-icon.pickup {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><circle cx="8" cy="6" r="2" fill="white"/></svg>');
+}
+
+.filter-icon.restaurant {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 6a.5.5 0 0 0-.488.608l1.652 7.434A2.5 2.5 0 0 0 4.104 16h5.792a2.5 2.5 0 0 0 2.44-1.958l.131-.59a3 3 0 0 0 1.3-5.854l.221-.99A.5.5 0 0 0 13.5 6H.5zM13 12.5a2.01 2.01 0 0 1-.316-.025l.081-.36.063-.283a1 1 0 0 0-1.97-.347l-.483 2.183a1.5 1.5 0 0 1-1.464 1.179H4.104a1.5 1.5 0 0 1-1.464-1.179L1.124 8.5h11.26l-.045.201-.183.82c.292.15.54.37.729.631.15.2.286.434.386.699.014.039.028.078.042.118.093.282.154.583.154.898z"/></svg>');
+}
+
+.filter-icon.tourist {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/><circle cx="8" cy="9" r="2.5" fill="white"/></svg>');
+}
+
+.filter-icon.shop {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0z"/></svg>');
+}
+
+.filter-icon.route {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>');
+}
+
+/* POPUPS - Mantener igual */
+.popup-content {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.4;
+    color: var(--text-primary);
+    font-size: 13px;
+}
+
+.popup-header {
+    background: var(--menu-header-bg);
+    padding: 12px 16px;
+    border-radius: 12px 12px 0 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.popup-header h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.popup-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    background: var(--bg-overlay-dark);
+    color: var(--text-light);
+}
+
+.popup-body {
+    padding: 12px 16px;
+    background: var(--bg-primary);
+}
+
+.popup-body p {
+    margin: 6px 0;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.3;
+}
+
+.popup-description {
+    color: var(--text-muted);
+    line-height: 1.3;
+    font-size: 12px;
+}
+
+.popup-detail {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin: 4px 0;
+}
+
+.popup-detail i {
+    width: 14px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+.popup-website a {
+    color: var(--btn-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 11px;
+}
+
+.popup-website a:hover {
+    text-decoration: underline;
+    color: var(--btn-primary-hover);
+}
+
+.popup-actions {
+    padding: 10px 16px;
+    background: var(--bg-secondary);
+    border-radius: 0 0 12px 12px;
+    border-top: 1px solid var(--border-light);
+}
+
+.btn-route {
+    width: 100%;
+    background: linear-gradient(135deg, var(--btn-primary) 0%, var(--btn-primary-hover) 100%);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: var(--text-light);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    box-shadow: 0 2px 8px rgba(0, 123, 191, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-route:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 123, 191, 0.4);
+    background: linear-gradient(135deg, var(--btn-primary-hover) 0%, #004494 100%);
+}
+
+.btn-route:active {
+    transform: translateY(0);
+}
+
+.btn-route i {
+    font-size: 11px;
+}
+
+/* Toast de errores */
+.error-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--toast-error-bg);
+    color: var(--text-light);
+    padding: 16px 20px;
+    border-radius: 8px;
+    z-index: 10000;
+    box-shadow: 0 4px 20px rgba(220, 53, 69, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 300px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.success-toast {
+    background: var(--toast-success-bg);
+    box-shadow: 0 4px 20px rgba(40, 167, 69, 0.3);
+}
+
+.info-toast {
+    background: var(--toast-info-bg);
+    box-shadow: 0 4px 20px rgba(23, 162, 184, 0.3);
+}
+
+/* Animaciones de entrada/salida */
+@keyframes slideIn {
+    from { 
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+}
+
+@keyframes slideOut {
+    from { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+    to { 
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Responsivo para filtros unificados */
+@media (max-width: 768px) {
+    .unified-filter-item {
+        padding: 8px 10px;
+    }
+    
+    .filter-icon {
+        width: 20px;
+        height: 20px;
+        background-size: 12px 12px;
+    }
+    
+    .filter-label {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    .unified-filters-container {
+        gap: 6px;
+    }
+    
+    .unified-filter-item {
+        padding: 6px 8px;
+    }
+    
+    .filter-icon {
+        width: 18px;
+        height: 18px;
+        background-size: 10px 10px;
+    }
+    
+    .filter-label {
+        font-size: 12px;
+    }
+}
